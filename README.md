@@ -43,18 +43,51 @@ I created this project as a way to deeply understand how real CPUs operate under
 ## ⚙️ How It Works (Conceptually)
 Even if you’re not familiar with hardware design, the processor works like this:
 
--Fetch – It looks at the current memory address and grabs the instruction.
+- Fetch – It looks at the current memory address and grabs the instruction.
 
--Decode – It figures out what kind of instruction it is (e.g., add two numbers).
+- Decode – It figures out what kind of instruction it is (e.g., add two numbers).
 
--Execute – It performs the operation (like addition, logic, shift).
+- Execute – It performs the operation (like addition, logic, shift).
 
--Memory – It may read or write to memory if needed.
+- Memory – It may read or write to memory if needed.
 
--Writeback – It saves the result for future use.
+- Writeback – It saves the result for future use.
 
--Repeat – It goes to the next instruction and does it again.
+- Repeat – It goes to the next instruction and does it again.
 
 Each of these steps is represented by a custom Verilog module and connected through a datapath.
+
+---
+
+## 🧪 How I Verified It
+- I used ModelSim to simulate each module independently.
+
+- Designed custom testbenches to check every CPU instruction, including edge cases.
+
+- Debugged using waveform visualization and manual signal tracing.
+
+- Step-by-step module integration to ensure the system scaled correctly.
+
+---
+
+## 🔧 Tools Used
+- Verilog: For hardware design
+
+- ModelSim: For simulation and debugging
+
+- Quartus Prime Lite: For eventual FPGA synthesis
+
+- Git + GitHub: For version control and documentation
+
+---
+
+##📌 What's Working Now
+- Full support for R-Type instructions (ADD, SUB, AND, OR, XOR, etc.)
+
+- Functional ALU, Control Unit, Register File, and Program Counter
+
+- Verified instruction fetch-decode-execute loop
+
+- Manual test programs to validate instruction behavior
 
 ---
