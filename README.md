@@ -35,8 +35,7 @@ I created this project as a way to deeply understand how real CPUs operate under
 │
 ├── img/        # Waveforms, timing diagrams, or screenshots
 │
-└── README.md   # You're reading it!
-
+└── README.md   # You're reading it!```
 ---
 
 ## ⚙️ How It Works (Conceptually)
