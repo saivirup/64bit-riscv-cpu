@@ -19,7 +19,8 @@ I created this project as a way to deeply understand how real CPUs operate under
 ---
 
 ## 🧩 Project Structure
-```markdown
+
+```text
 ├── src/        # All main CPU components (Verilog modules)
 │   ├── alu.v
 │   ├── control.v
@@ -36,7 +37,7 @@ I created this project as a way to deeply understand how real CPUs operate under
 │
 └── README.md   # You're reading it!
 
-```text
+```
 ---
 
 ## ⚙️ How It Works (Conceptually)
