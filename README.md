@@ -17,10 +17,9 @@ This project is a complete design of a 64-bit single-cycle RISC-V processor buil
 I created this project as a way to deeply understand how real CPUs operate under the hood. Rather than just using processors, this project was about learning how to *build one*. From instruction decoding to memory operations, each module was written and tested by hand. This project pushes beyond class assignments into real digital logic engineering.
 
 ---
-```markdown
-## 🧩 Project Structure
 
-```text
+## 🧩 Project Structure
+```markdown
 ├── src/        # All main CPU components (Verilog modules)
 │   ├── alu.v
 │   ├── control.v
@@ -35,7 +34,9 @@ I created this project as a way to deeply understand how real CPUs operate under
 │
 ├── img/        # Waveforms, timing diagrams, or screenshots
 │
-└── README.md   # You're reading it!```
+└── README.md   # You're reading it!
+
+```text
 ---
 
 ## ⚙️ How It Works (Conceptually)
