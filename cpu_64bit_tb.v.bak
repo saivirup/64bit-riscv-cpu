@@ -1,0 +1,57 @@
+`timescale 1ns/1ps
+
+module cpu_64bit_tb;
+
+    reg clk;
+    reg rst;
+    wire [63:0] pc_out;
+    wire [31:0] instruction_out;
+    wire [63:0] alu_result_out;
+
+    // Instantiate the DUT (Device Under Test)
+    cpu_64bit dut (
+        .clk(clk),
+        .rst(rst),
+        .pc_out(pc_out),
+        .instruction_out(instruction_out),
+        .alu_result_out(alu_result_out)
+    );
+
+    // Clock generation
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    // Instruction checking variables
+    integer i;
+
+    // Expected values for a few ALU tests (modify as needed)
+    reg [63:0] expected_regfile [0:31];
+
+    // Reset and test procedure
+    initial begin
+        rst = 1;
+        #10 rst = 0;
+
+        // Wait sufficient time for all instructions to execute
+        #200;
+
+        // Load expected values manually (assuming test completes by 200ns)
+        expected_regfile[3] = 64'd3;  // For add x3, x1=1, x2=2
+
+        // Check register values via DUT internals
+        if (dut.register_file.registers[3] !== expected_regfile[3]) begin
+            $display("[FAIL] x3 expected %0d, got %0d", expected_regfile[3], dut.register_file.registers[3]);
+            $stop;
+        end else begin
+            $display("[PASS] add x3 = x1 + x2 = %0d", dut.register_file.registers[3]);
+        end
+
+        // More assertions can be added here for each instruction effect
+
+        $display("\nAll tests passed.");
+        $finish;
+    end
+
+endmodule
