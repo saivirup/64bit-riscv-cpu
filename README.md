@@ -43,17 +43,17 @@ I created this project as a way to deeply understand how real CPUs operate under
 ## ⚙️ How It Works (Conceptually)
 Even if you’re not familiar with hardware design, the processor works like this:
 
-Fetch – It looks at the current memory address and grabs the instruction.
+-Fetch – It looks at the current memory address and grabs the instruction.
 
-Decode – It figures out what kind of instruction it is (e.g., add two numbers).
+-Decode – It figures out what kind of instruction it is (e.g., add two numbers).
 
-Execute – It performs the operation (like addition, logic, shift).
+-Execute – It performs the operation (like addition, logic, shift).
 
-Memory – It may read or write to memory if needed.
+-Memory – It may read or write to memory if needed.
 
-Writeback – It saves the result for future use.
+-Writeback – It saves the result for future use.
 
-Repeat – It goes to the next instruction and does it again.
+-Repeat – It goes to the next instruction and does it again.
 
 Each of these steps is represented by a custom Verilog module and connected through a datapath.
 
