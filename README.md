@@ -91,3 +91,18 @@ Each of these steps is represented by a custom Verilog module and connected thro
 - Manual test programs to validate instruction behavior
 
 ---
+
+## 🛠️ What's Coming Next
+- Add support for branching, memory operations, and immediate values
+
+- Build a pipelined version of this CPU (like in modern processors)
+
+- Port the project to an FPGA and run real test programs
+
+- Design a multicore CPU architecture and basic operating system support
+
+---
+
+## 📫 Want to Talk?
+This project is part of my journey into digital systems design and low-level computer engineering. If you're working in ASIC design, FPGA development, or digital verification and want to connect — feel free to reach out or explore the repo!
+
