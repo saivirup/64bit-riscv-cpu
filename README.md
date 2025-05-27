@@ -31,7 +31,7 @@ I created this project as a way to deeply understand how real CPUs operate under
 │   ├── alu_tb.v
 │   └── ...
 │
-├── docs/       # Diagrams, reference materials, planning documents
+├── docs/       # Reference materials, planning documents
 │
 ├── img/        # Waveforms, timing diagrams, or screenshots
 │
