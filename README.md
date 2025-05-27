@@ -81,7 +81,7 @@ Each of these steps is represented by a custom Verilog module and connected thro
 
 ---
 
-##📌 What's Working Now
+## 📌 What's Working Now
 - Full support for R-Type instructions (ADD, SUB, AND, OR, XOR, etc.)
 
 - Functional ALU, Control Unit, Register File, and Program Counter
