@@ -1,4 +1,2 @@
-vsim.wlf
-work/
-transcript
-modelsim.ini
+# Backup folder (custom)
+backup_files/
