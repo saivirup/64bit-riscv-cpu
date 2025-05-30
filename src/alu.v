@@ -1,27 +1,43 @@
 module alu (
-    input  [63:0] a,
-    input  [63:0] b,
-    input  [3:0]  alu_control,
-    output        zero,
-    output reg [63:0] ALUresult
+    input  [63:0] a,               // First ALU operand (usually rs1)
+    input  [63:0] b,               // Second ALU operand (usually rs2 or immediate)
+    input  [3:0]  alu_control,     // ALU operation selector from alu_control.v
+    output reg        invalid_op,  // <-- NEW: goes high if alu_control is invalid
+    output reg [63:0] ALUresult    // Final result of the selected ALU operation
 );
 
-    // Output 1 if result is zero
-    assign zero = (ALUresult == 64'b0);
+    // === ALU Operation Codes ===
+    localparam ALU_AND  = 4'b0000; // Logical AND
+    localparam ALU_OR   = 4'b0001; // Logical OR
+    localparam ALU_ADD  = 4'b0010; // Addition
+    localparam ALU_SUB  = 4'b0110; // Subtraction
+    localparam ALU_SLT  = 4'b0111; // Set on Less Than (signed)
+    localparam ALU_XOR  = 4'b1000; // Logical XOR
+    localparam ALU_SLL  = 4'b1001; // Shift Left Logical
+    localparam ALU_SRL  = 4'b1010; // Shift Right Logical
+    localparam ALU_SRA  = 4'b1011; // Shift Right Arithmetic (preserves sign)
+    localparam ALU_SLTU = 4'b1100; // Set on Less Than Unsigned
+    localparam ALU_INV  = 4'b1111; // Illegal or unrecognized operation
+
 
     always @(*) begin
+        invalid_op = 1'b0;
+
         case (alu_control)
-            4'b0000: ALUresult = a & b;                  // AND
-            4'b0001: ALUresult = a | b;                  // OR
-            4'b0010: ALUresult = a + b;                  // ADD
-            4'b0110: ALUresult = a - b;                  // SUB
-            4'b0111: ALUresult = ($signed(a) < $signed(b)) ? 64'b1 : 64'b0; // SLT
-            4'b1000: ALUresult = a ^ b;                  // XOR
-            4'b1001: ALUresult = a << b[5:0];            // SLL (lower 6 bits only)
-            4'b1010: ALUresult = a >> b[5:0];            // SRL
-            4'b1011: ALUresult = $signed(a) >>> b[5:0];  // SRA
-            4'b1100: ALUresult = (a < b) ? 64'b1 : 64'b0; // SLTU
-            default: ALUresult = 64'b0;                  // Safe default
+            ALU_AND:  ALUresult = a & b;
+            ALU_OR:   ALUresult = a | b;
+            ALU_ADD:  ALUresult = a + b;
+            ALU_SUB:  ALUresult = a - b;
+            ALU_SLT:  ALUresult = ($signed(a) < $signed(b)) ? 64'b1 : 64'b0;
+            ALU_XOR:  ALUresult = a ^ b;
+            ALU_SLL:  ALUresult = a << b[5:0];
+            ALU_SRL:  ALUresult = a >> b[5:0];
+            ALU_SRA:  ALUresult = $signed(a) >>> b[5:0];
+            ALU_SLTU: ALUresult = (a < b) ? 64'b1 : 64'b0;
+            default:  begin
+                ALUresult = 64'b0;
+                invalid_op = 1'b1;  // Raise flag for unsupported operation
+            end
         endcase
     end
 
