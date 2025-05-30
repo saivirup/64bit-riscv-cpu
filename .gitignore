@@ -1,0 +1,18 @@
+# Quartus project and simulation artifacts
+*.bak
+*.vcd
+*.wlf
+*.bsf
+*.bdf
+*.qpf
+*.qsf
+*.mpf
+transcript
+modelsim.ini
+
+# Tool-generated folders
+/work/
+/db/
+
+# General backups
+*~

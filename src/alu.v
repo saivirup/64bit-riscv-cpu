@@ -2,14 +2,13 @@ module alu (
     input  [63:0] a,
     input  [63:0] b,
     input  [3:0]  alu_control,
-    output        zero,
-    output reg [63:0] ALUresult
+    output reg [63:0] ALUresult,
+    output reg          invalid
 );
 
-    // Output 1 if result is zero
-    assign zero = (ALUresult == 64'b0);
-
     always @(*) begin
+        invalid = 1'b0; // default
+
         case (alu_control)
             4'b0000: ALUresult = a & b;                  // AND
             4'b0001: ALUresult = a | b;                  // OR
@@ -21,7 +20,11 @@ module alu (
             4'b1010: ALUresult = a >> b[5:0];            // SRL
             4'b1011: ALUresult = $signed(a) >>> b[5:0];  // SRA
             4'b1100: ALUresult = (a < b) ? 64'b1 : 64'b0; // SLTU
-            default: ALUresult = 64'b0;                  // Safe default
+            default: begin
+                ALUresult = 64'b0;
+                invalid = 1'b1;
+                $display("ALU ERROR: Invalid alu_control value %b at time %t", alu_control, $time);
+            end
         endcase
     end
 

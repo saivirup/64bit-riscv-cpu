@@ -31,9 +31,28 @@ module reg_file (
             registers[i] = 64'd0;
         end
 
-        // Only preload inputs for instruction tests
-        registers[1] = 64'd3;
-        registers[2] = 64'd5;
+        // Updated initial values to match testbench expectations
+        registers[2]  = 64'd5;                   // x2
+        registers[3]  = 64'd10;                  // x3
+        registers[5]  = 64'd20;                  // x5
+        registers[6]  = 64'd8;                   // x6
+        registers[8]  = 64'hFF;                  // x8
+        registers[9]  = 64'h0F;                  // x9
+        registers[11] = 64'hF0;                 // x11
+        registers[12] = 64'h0F;                 // x12
+        registers[14] = 64'hAA;                 // x14
+        registers[15] = 64'h55;                 // x15
+        registers[17] = 64'd1;                  // x17
+        registers[18] = 64'd3;                  // x18
+        registers[20] = 64'd64;                 // x20
+        registers[21] = 64'd3;                  // x21
+        registers[23] = -64'sd16;               // x23
+        registers[24] = 64'd2;                  // x24
+        registers[26] = 64'd3;                  // x26
+        registers[27] = 64'd7;                  // x27
+        registers[29] = 64'hFFFFFFFFFFFFFFF0;   // x29
+        registers[30] = 64'hFFFFFFFFFFFFFFF1;   // x30
+
     end
 
 endmodule

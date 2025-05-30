@@ -1,4 +1,6 @@
 // assign is for combinational logic, while always is for sequential logic
+// 'oldAddr' holds the current PC value
+// 'newAddr' is the next PC value (usually pc + 4)
 
 module pc (
 
