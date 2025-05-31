@@ -1,2 +1,98 @@
 # Backup folder (custom)
 backup_files/
+
+# === General ===
+*.log
+*.vcd
+*.vcd.gz
+*.out
+*.tmp
+*.swp
+*.bak
+*.DS_Store
+
+# === ModelSim/QuestaSim ===
+work/
+vsim.wlf
+transcript
+*.wlf
+*.mti
+*.ini
+*.bak
+*.mpf
+*.svf
+*.ucdb
+
+# === Quartus ===
+db/
+incremental_db/
+output_files/
+*.rpt
+*.qsf.auto
+*.sof
+*.pof
+*.jic
+*.smsg
+*.summary
+*.pin
+*.sld
+
+# === Vivado (if used) ===
+*.jou
+*.log
+*.str
+*.bin
+*.xdc
+*.xpr
+*.xise
+.sim/
+.hw/
+.cache/
+webtalk.log
+usage_statistics_webtalk.xml
+
+# === Simulation Dumps ===
+*.vvp
+*.fst
+*.vcd
+*.lxt*
+*.gtkw
+
+# === Project-Specific Build Files ===
+*.elf
+*.hex
+*.mem
+*.bin
+*.img
+
+# === VS Code ===
+.vscode/
+*.code-workspace
+
+# ModelSim & Simulation Artifacts
+*.wlf
+transcript
+*.vcd
+*.mti
+modelsim.ini
+
+# Quartus Project Files
+*.qsf
+*.qpf
+*.qws
+*.mpf
+
+# Backup Files
+*.bak
+
+# Quartus BSF (Block Symbol File)
+*.bsf
+*.bdf
+
+# Ignore db/, incremental_db/, output_files/ if you use Quartus
+db/
+incremental_db/
+output_files/
+
+# Optional: VS Code
+.vscode/

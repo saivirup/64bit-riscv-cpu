@@ -9,7 +9,7 @@ module r_cpu (
 );
 
     // === PC + Instruction Fetch ===
-    wire [63:0] pc_out, pc_next;
+    wire [63:0] pc_next;
 
     pc pc_inst (
         .clk(clk),
@@ -23,8 +23,6 @@ module r_cpu (
         .pc_plus_4(pc_next)
     );
 
-    wire [31:0] instruction;
-
     instr_mem instr_mem_inst (
         .address(pc_out),
         .instruction(instruction)
@@ -32,7 +30,7 @@ module r_cpu (
 
     // === Instruction Fields ===
     wire [6:0] opcode   = instruction[6:0];
-    wire [4:0] rd       = instruction[11:7];
+    assign rd           = instruction[11:7];
     wire [2:0] funct3   = instruction[14:12];
     wire [4:0] rs1      = instruction[19:15];
     wire [4:0] rs2      = instruction[24:20];
@@ -73,8 +71,6 @@ module r_cpu (
     );
 
     // === ALU ===
-    wire [63:0] alu_result;
-
     alu alu_inst (
         .a(reg_data1),
         .b(reg_data2),

@@ -31,7 +31,8 @@ module reg_file (
             registers[i] = 64'd0;
         end
 
-        // Only preload inputs for instruction tests
+        // Only preload inputs for R- Type instruction tests
+        /*
         registers[2]  = 64'd5;           // x2
         registers[3]  = 64'd10;          // x3
         registers[5]  = 64'd20;          // x5
@@ -52,6 +53,11 @@ module reg_file (
         registers[27] = 64'd7;           // x27
         registers[29] = 64'hFFFFFFFFFFFFFFF0; // x29
         registers[30] = 64'hFFFFFFFFFFFFFFF1; // x30
+        */
+        
+        // === For JALR ===
+        registers[1] = 64'd64;  // x1 = base jump address
+
 
     end
 

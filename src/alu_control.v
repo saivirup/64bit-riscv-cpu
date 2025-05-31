@@ -19,7 +19,7 @@ module alu_control (
     localparam ALU_INV  = 4'b1111; // Illegal operation
 
     always @(*) begin
-        alu_control = ALU_INV; // default to illegal
+        alu_control = ALU_INV; // Default to invalid
 
         if (ALUOp == 2'b10) begin // R-type
             case (funct3)
@@ -32,7 +32,21 @@ module alu_control (
                 3'b010: alu_control = ALU_SLT;
                 3'b011: alu_control = ALU_SLTU;
             endcase
+        end else if (ALUOp == 2'b01) begin // I-type
+            case (funct3)
+                3'b000: alu_control = ALU_ADD; // ADDI
+                3'b111: alu_control = ALU_AND; // ANDI
+                3'b110: alu_control = ALU_OR;  // ORI
+                3'b100: alu_control = ALU_XOR; // XORI
+                3'b001: alu_control = ALU_SLL; // SLLI
+                3'b101: alu_control = (funct7_5) ? ALU_SRA : ALU_SRL; // SRAI / SRLI
+                3'b010: alu_control = ALU_SLT; // SLTI
+                3'b011: alu_control = ALU_SLTU; // SLTIU
+            endcase
+        end else if (ALUOp == 2'b00) begin
+                alu_control = ALU_ADD;  // for LW, SW, JALR
         end
+
     end
 
 endmodule
