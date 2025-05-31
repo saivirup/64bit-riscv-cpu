@@ -17,6 +17,8 @@ module control (
     localparam OPCODE_ITYPE  = 7'b0010011;
     localparam OPCODE_LOAD   = 7'b0000011;
     localparam OPCODE_JALR   = 7'b1100111;
+    localparam OPCODE_STORE  = 7'b0100011; // <--- added
+
 
     always @(*) begin
         // Default safe values
@@ -54,8 +56,17 @@ module control (
                 ALUSrc    = 1;
                 MemRead   = 0;
                 MemWrite  = 0;
-                MemtoReg  = 0; // write pc+4 to rd, not memory
-                ALUOp     = 2'b00; // just add
+                MemtoReg  = 0;      // write pc+4 to rd, not memory
+                ALUOp     = 2'b00;  // just add
+            end
+
+            OPCODE_STORE: begin
+                RegWrite  = 0;      // No register write
+                ALUSrc    = 1;      // Use immediate offset
+                MemRead   = 0;
+                MemWrite  = 1;      // Enable memory write
+                MemtoReg  = 0;      // Don't care
+                ALUOp     = 2'b00;  // Address calc (add)
             end
 
         endcase

@@ -1,7 +1,7 @@
 module alu_control (
-    input [1:0] ALUOp,
-    input [2:0] funct3,
-    input       funct7_5,
+    input      [1:0]      ALUOp,
+    input      [2:0]     funct3,
+    input      [6:0]     funct7,
     output reg [3:0] alu_control
 );
 
@@ -18,10 +18,13 @@ module alu_control (
     localparam ALU_SLTU = 4'b1100;
     localparam ALU_INV  = 4'b1111; // Illegal operation
 
-    always @(*) begin
-        alu_control = ALU_INV; // Default to invalid
+    wire funct7_5 = funct7[5];     // same as instruction[30]
 
-        if (ALUOp == 2'b10) begin // R-type
+    always @(*) begin
+
+        alu_control = ALU_INV;      // Default to invalid
+
+        if (ALUOp == 2'b10) begin   // R-type
             case (funct3)
                 3'b000: alu_control = (funct7_5) ? ALU_SUB : ALU_ADD;
                 3'b111: alu_control = ALU_AND;

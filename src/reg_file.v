@@ -56,8 +56,9 @@ module reg_file (
         */
         
         // === For JALR ===
+        /*
         registers[1] = 64'd64;  // x1 = base jump address
-
+        */
 
     end
 

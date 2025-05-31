@@ -20,10 +20,11 @@ module data_mem (
     // Asynchronous read
     assign read_data = (MemRead) ? memory[address[63:3]] : 64'b0;
 
+    /*
     initial begin
         memory[2] = 64'd1234;  // Expected value to be loaded into x2
     end
-
+    */
     
     // Optional initialization (uncomment to use during simulation)
     // initial begin

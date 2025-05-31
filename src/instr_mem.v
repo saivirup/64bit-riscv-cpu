@@ -1,5 +1,3 @@
-`timescale 1ns/1ps
-
 module instr_mem (
     input  wire [63:0] address,
     output wire [31:0] instruction
@@ -59,13 +57,22 @@ module instr_mem (
         // -----------------------------------------------
         // Jump And Link Register (JALR) Instruction Test
         // -----------------------------------------------
-
+        /*
         memory[0] = 32'h00808567;  // jalr x10, x1, 8 -> PC should jump to 72
+        */
+
+        // -----------------------------------------------
+        // Load Word (LW) & Store Word (SW) Instruction Test
+        // -----------------------------------------------
+        memory[0] = 32'h4D200093; // addi x1, x0, 1234
+        memory[1] = 32'h00800113; // addi x2, x0, 8
+        memory[2] = 32'h00112023; // sw x1, 0(x2)
+        memory[3] = 32'h00012183; // lw x3, 0(x2)
 
         // -----------------------------------------------
         // Fill Remaining Memory with NOPs
         // -----------------------------------------------
-        for (i = 1; i < 256; i = i + 1)
+        for (i = 4; i < 256; i = i + 1)
             memory[i] = 32'h00000013; // NOP (ADDI x0, x0, 0)
 
     end
