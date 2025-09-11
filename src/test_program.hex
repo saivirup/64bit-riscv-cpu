@@ -1,0 +1,81 @@
+// test_program.hex - Comprehensive test program for RISC-V CPU
+// This file should be loaded into instruction memory
+//
+// Memory Layout:
+// 0x00: R-Type Tests
+// 0x20: I-Type Tests  
+// 0x40: Load/Store Tests
+// 0x60: Branch Tests
+// 0x80: Jump Tests
+// 0xA0: Upper Immediate Tests
+
+// === Initialize Test Values in Registers (using ADDI) ===
+// x1 = 8, x2 = 16, x3 = 5, x4 = 10, x5 = -1
+00800093  // ADDI x1, x0, 8
+01000113  // ADDI x2, x0, 16  
+00500193  // ADDI x3, x0, 5
+00A00213  // ADDI x4, x0, 10
+FFF00293  // ADDI x5, x0, -1
+
+// === R-Type Instruction Tests ===
+002081B3  // ADD  x3, x1, x2     ; x3 = 8 + 16 = 24
+40110233  // SUB  x4, x2, x1     ; x4 = 16 - 8 = 8  
+0020F2B3  // AND  x5, x1, x2     ; x5 = 8 & 16 = 0
+0020E333  // OR   x6, x1, x2     ; x6 = 8 | 16 = 24
+0020C3B3  // XOR  x7, x1, x2     ; x7 = 8 ^ 16 = 24
+00309433  // SLL  x8, x1, x3     ; x8 = 8 << 5 = 256
+00315493  // SRL  x9, x2, x3     ; x9 = 16 >> 5 = 0
+4020D533  // SRA  x10, x1, x0    ; x10 = 8 >>> 0 = 8 (no shift)
+0020A5B3  // SLT  x11, x1, x2    ; x11 = (8 < 16) = 1
+0020B633  // SLTU x12, x1, x2    ; x12 = (8 < 16) = 1
+
+// === I-Type Instruction Tests ===
+02A00693  // ADDI x13, x0, 42    ; x13 = 42
+03252713  // SLTI x14, x10, 50   ; x14 = (8 < 50) = 1
+01E6B793  // SLTIU x15, x13, 30  ; x15 = (42 < 30) = 0
+00F6C813  // XORI x16, x13, 15   ; x16 = 42 ^ 15 = 37
+0086E893  // ORI  x17, x13, 8    ; x17 = 42 | 8 = 42
+00F6F913  // ANDI x18, x13, 15   ; x18 = 42 & 15 = 10
+00269993  // SLLI x19, x13, 2    ; x19 = 42 << 2 = 168
+00199A13  // SRLI x20, x19, 1    ; x20 = 168 >> 1 = 84
+
+// Set up negative number for SRAI test
+FF000A93  // ADDI x21, x0, -16   ; x21 = -16
+401ADA93  // SRAI x21, x21, 1    ; x21 = -16 >> 1 = -8
+
+// === Load/Store Tests ===
+// Set up base addresses and test data
+01000B13  // ADDI x22, x0, 16    ; x22 = 16 (base addr)
+DEA00B93  // ADDI x23, x0, 0xDEA ; x23 = test data (truncated)
+
+// Load tests (assuming data memory initialized with test values)
+000B2C03  // LW   x24, 0(x22)    ; x24 = Mem[16]
+008B2C83  // LW   x25, 8(x22)    ; x25 = Mem[24]
+
+// Store tests  
+017B2023  // SW   x23, 0(x22)    ; Mem[16] = x23
+017B2423  // SW   x23, 8(x22)    ; Mem[24] = x23
+
+// === Branch Tests ===
+// Set up test values for branching
+00A00D13  // ADDI x26, x0, 10    ; x26 = 10
+00A00D93  // ADDI x27, x0, 10    ; x27 = 10 (equal to x26)
+00500E13  // ADDI x28, x0, 5     ; x28 = 5 (less than x26)
+
+// BEQ test (should branch if x26 == x27)
+01BD0463  // BEQ  x26, x27, 8    ; if (x26 == x27) PC += 8
+00000013  // NOP                  ; this should be skipped
+00000013  // NOP                  ; branch target
+
+// BNE test (should not branch if x26 == x27)  
+01BD1463  // BNE  x26, x27, 8    ; if (x26 != x27) PC += 8
+00100E93  // ADDI x29, x0, 1     ; this should execute
+00000013  // NOP
+
+// BLT test (should branch if x28 < x26)
+01BE2463  // BLT  x28, x26, 8    ; if (x28 < x26) PC += 8
+00000013  // NOP                  ; this should be skipped  
+00200F13  // ADDI x30, x0, 2     ; branch target
+
+// BGE test (should branch if x26 >= x28)
+01CD5463  // BGE  x26, x28,
