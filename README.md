@@ -1,20 +1,18 @@
 # 64-bit RISC-V CPU
 
-This project is a complete design of a 64-bit single-cycle RISC-V processor built from scratch in Verilog. It closely follows the RV64I instruction set architecture and was developed with modularity, clarity, and extensibility in mind. All components are meant to be designed, tested, and simulated individually before integration.
+A 64-bit RISC-V processor built in SystemVerilog, implementing the RV64I base instruction set (excluding OS-level instructions). Built with a modular architecture, where each component (ALU, Control, RegFile, PC, Memory) was unit-tested in simulation before full CPU integration. This project demonstrates a complete CPU datapath that executes important operations at the hardware level
 
 ---
 
-## What This Project Does
+## How It Works
 
-- **Simulates how a real CPU works at the hardware level**
-- **Executes basic computer instructions**, like addition, subtraction, and branching (decision-making)
-- Helps understand the internal workings of processors, such as how they fetch instructions, decode them, process data, and store results
-
----
-
-## Why I Built This
-
-I created this project as a way to deeply understand how real CPUs operate under the hood. Rather than just using processors, this project was about learning how to *build one*. From instruction decoding to memory operations, each module was written and tested by hand. This project pushes beyond class assignments into real digital logic engineering.
+The CPU follows the standard instruction execution cycle:
+- Fetch: The processors looks at the current memory address and grabs the instruction.
+- Decode: The processor figures out what the instructions is telling it to do.
+- Execute: The processor performs the instruction.
+- Memory: The processor reads/writes from/to memory if required.
+- Writeback: The processor saves the result for future use.
+This process repeats for every instruction in the Instruction Memory.
 
 ---
 
@@ -40,44 +38,8 @@ I created this project as a way to deeply understand how real CPUs operate under
 ```
 ---
 
-## How It Works (Conceptually)
-Even if you’re not familiar with hardware design, the processor works like this:
-
-- Fetch – It looks at the current memory address and grabs the instruction.
-
-- Decode – It figures out what kind of instruction it is (e.g., add two numbers).
-
-- Execute – It performs the operation (like addition, logic, shift).
-
-- Memory – It may read or write to memory if needed.
-
-- Writeback – It saves the result for future use.
-
-- Repeat – It goes to the next instruction and does it again.
-
-Each of these steps is represented by a custom Verilog module and connected through a datapath.
-
----
-
-## How I Verified It
-- I used ModelSim to simulate each module independently.
-
-- Designed custom testbenches to check every CPU instruction, including edge cases.
-
-- Debugged using waveform visualization and manual signal tracing.
-
-- Step-by-step module integration to ensure the system scaled correctly.
-
----
-
-## Tools Used
-- Verilog: For hardware design
-
-- ModelSim: For simulation and debugging
-
-- Quartus Prime Lite: For eventual FPGA synthesis
-
-- Git + GitHub: For version control and documentation
+## How It Was Verified:
+- Verified using SystemVerilog testbenches and ModelSim waveforms.
 
 ---
 
@@ -91,18 +53,16 @@ Each of these steps is represented by a custom Verilog module and connected thro
 ---
 
 ## What's Coming Next
-- Add support for B-Type, J-Type, U-Type, and CSR/System Instructions
+- Extend the CPU to a 5 Stage Pipeline.
 
-- Build a pipelined version of this CPU
+- Implement Hazard Handling: Data Hazards, Control Hazards, and Structural Hazards.
 
-- Build a multicore version of this CPU
+- Deploy for testing onto an FPGA.
 
-- Port the project to an FPGA and run real test programs
-
-- Basic operating system support
+- Explore Advanced Concepts: Out-of-Order execution, Superscalar pipelines, Cache hierarchies, Fabricating CPU.
 
 ---
 
 ## Want to Talk?
-This project is part of my journey into digital systems design and low-level computer engineering. If you're working in ASIC design, FPGA development, or digital verification and want to connect — feel free to reach out to my email at saivirup@gmail.com.
+This project is part of our journey into digital systems design and low-level computer engineering. If you're working in ASIC design, FPGA development, or digital verification and want to connect — feel free to reach out to our emails at saivirup@gmail.com. and 
 
