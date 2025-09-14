@@ -59,4 +59,5 @@ Each module was unit-tested in isolation with SystemVerilog testbenches. Integra
 
 ## Want to Talk?
 
-This project is part of our journey into digital systems design and low-level computer engineering. If you're working in ASIC design, FPGA development, or digital verification and want to connect — reach me at saivirup@gmail.com
+This project is part of our journey into digital systems design and low-level computer engineering. If you're working in ASIC design, FPGA development, or digital verification and want to connect — reach out to us at saivirup@gmail.com and Gerard.gd@icloud.com
+
